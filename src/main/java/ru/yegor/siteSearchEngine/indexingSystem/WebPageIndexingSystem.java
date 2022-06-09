@@ -1,4 +1,4 @@
-package ru.yegor.siteSearchEngine;
+package ru.yegor.siteSearchEngine.indexingSystem;
 
 import org.jsoup.Connection;
 import org.jsoup.HttpStatusException;
@@ -6,6 +6,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import ru.yegor.siteSearchEngine.ConnectionManager;
 import ru.yegor.siteSearchEngine.lemmatizer.ConvertingTextToLemmas;
 import ru.yegor.siteSearchEngine.model.Lemma;
 import ru.yegor.siteSearchEngine.model.Page;

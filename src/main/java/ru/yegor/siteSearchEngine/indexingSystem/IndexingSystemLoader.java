@@ -1,4 +1,4 @@
-package ru.yegor.siteSearchEngine;
+package ru.yegor.siteSearchEngine.indexingSystem;
 
 import ru.yegor.siteSearchEngine.model.Page;
 
@@ -6,7 +6,7 @@ import java.util.Set;
 import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.TimeUnit;
 
-public class Main {
+public class IndexingSystemLoader {
     private static final String urlSite = "https://t-kit.ru/";
 
     public static void main(String[] args) {
