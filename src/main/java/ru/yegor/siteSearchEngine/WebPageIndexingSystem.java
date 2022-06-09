@@ -81,7 +81,7 @@ public class WebPageIndexingSystem extends RecursiveTask<Set<Page>> {
         return pages;
     }
 
-    public String getPathFromTablePage(Page page) {
+    private String getPathFromTablePage(Page page) {
         java.sql.Connection connection = ConnectionManager.getConnection();
         String checkQuery = "SELECT path FROM search_engine.page WHERE path = ?";
         String path = "";
