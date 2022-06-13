@@ -66,7 +66,7 @@ public class WebPageIndexingSystem extends RecursiveTask<Set<Page>> {
             insertIntoTableLemma(titleLemmas);
             insertIntoTableLemma(bodyLemmas);
 
-            Page page = new Page(getUrl().substring(getUrlSite().length() - 1), response.statusCode(), document.toString());
+            Page page = new Page(getUrl().substring(getUrlSite().length() - 1), response.statusCode(), document.toString(), getSiteIdFromTableSite(getUrlSite()));
             insertIntoTablePage(page);
             pages.add(page);
 
@@ -101,8 +101,8 @@ public class WebPageIndexingSystem extends RecursiveTask<Set<Page>> {
                 pages.addAll(task.join());
             }
         } catch (HttpStatusException e) {
-            insertIntoTablePage(new Page(e.getUrl().substring(getUrlSite().length() - 1), e.getStatusCode(), ""));
-            pages.add(new Page(e.getUrl().substring(getUrlSite().length() - 1), e.getStatusCode(), ""));
+            insertIntoTablePage(new Page(e.getUrl().substring(getUrlSite().length() - 1), e.getStatusCode(), "", getSiteIdFromTableSite(getUrlSite())));
+            pages.add(new Page(e.getUrl().substring(getUrlSite().length() - 1), e.getStatusCode(), "", getSiteIdFromTableSite(getUrlSite())));
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
         }
@@ -361,12 +361,13 @@ public class WebPageIndexingSystem extends RecursiveTask<Set<Page>> {
     private void insertIntoTablePage(Page page) {
         java.sql.Connection connection = ConnectionManager.getConnection();
         if (!page.getPath().equals(getPathFromTablePage(page))) {
-            String insertQuery = "INSERT INTO search_engine.page (path, code, content) VALUES (?, ?, ?)";
+            String insertQuery = "INSERT INTO search_engine.page (path, code, content, site_id) VALUES (?, ?, ?, ?)";
             try {
                 PreparedStatement preparedStatement = connection.prepareStatement(insertQuery);
                 preparedStatement.setString(1, page.getPath());
                 preparedStatement.setInt(2, page.getCode());
                 preparedStatement.setString(3, page.getContent());
+                preparedStatement.setInt(4, getSiteIdFromTableSite(getUrlSite()));
                 preparedStatement.executeUpdate();
 
                 preparedStatement.close();

@@ -1,6 +1,6 @@
 package ru.yegor.siteSearchEngine.model;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "lemma")
@@ -10,6 +10,8 @@ public class Lemma {
     private int id;
     private String lemma;
     private int frequency;
+    @Column(name = "site_id")
+    private int siteId;
 
     public Lemma() {
     }
@@ -17,6 +19,12 @@ public class Lemma {
     public Lemma(String lemma, int frequency) {
         this.lemma = lemma;
         this.frequency = frequency;
+    }
+
+    public Lemma(String lemma, int frequency, int siteId) {
+        this.lemma = lemma;
+        this.frequency = frequency;
+        this.siteId = siteId;
     }
 
     public int getId() {
@@ -41,6 +49,14 @@ public class Lemma {
 
     public void setFrequency(int frequency) {
         this.frequency = frequency;
+    }
+
+    public int getSiteId() {
+        return siteId;
+    }
+
+    public void setSiteId(int siteId) {
+        this.siteId = siteId;
     }
 
     @Override

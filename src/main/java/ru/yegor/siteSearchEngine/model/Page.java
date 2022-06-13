@@ -1,6 +1,6 @@
 package ru.yegor.siteSearchEngine.model;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "page")
@@ -11,14 +11,17 @@ public class Page {
     private String path;
     private int code;
     private String content;
+    @Column(name = "site_id")
+    private int siteId;
 
     public Page() {
     }
 
-    public Page(String path, int code, String content) {
+    public Page(String path, int code, String content, int siteId) {
         this.path = path;
         this.code = code;
         this.content = content;
+        this.siteId = siteId;
     }
 
     public int getId() {
@@ -51,5 +54,13 @@ public class Page {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public int getSiteId() {
+        return siteId;
+    }
+
+    public void setSiteId(int siteId) {
+        this.siteId = siteId;
     }
 }

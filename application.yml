@@ -1,0 +1,14 @@
+spring.datasource.url: jdbc:mysql://localhost:3306/search_engine?useUnicode=true&characterEncoding=utf8
+spring.datasource.username: root
+spring.datasource.password: testtest
+spring.jpa.hibernate.ddl-auto: none
+sites:
+  -
+    url: https://t-kit.ru/
+    name: ТехноКит
+  -
+    url: https://portevera.ru/
+    name: PorteVera
+userAgent: Mozilla/5.0 (Windows; U; WindowsNT 5.1; en-US; rv1.8.1.6) Gecko/20070725 Firefox/2.0.0.6
+referrer: http://www.google.com
+server.servlet.context-path: /admin
